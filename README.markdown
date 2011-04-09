@@ -1,1 +1,1 @@
-EADME - mealstory - simple rails app
+ mealstory - a simple rails app
