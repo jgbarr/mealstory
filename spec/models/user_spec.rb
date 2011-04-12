@@ -52,6 +52,7 @@ describe User do
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid
   end
+  
   describe "password validations" do
 
     it "should require a password" do
@@ -76,6 +77,7 @@ describe User do
       User.new(hash).should_not be_valid
     end
   end
+  
   describe "password encryption" do
     before(:each) do
       @user = User.create!(@attr)
@@ -147,6 +149,25 @@ describe User do
       @user.microposts.should == [@mp2, @mp1]
     end
   end
+ end
+  describe "admin attribute" do
+
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+
+    it "should respond to admin" do
+      @user.should respond_to(:admin)
+    end
+
+    it "should not be an admin by default" do
+      @user.should_not be_admin
+    end
+
+    it "should be convertible to an admin" do
+      @user.toggle!(:admin)
+      @user.should be_admin
+    end
   end
 end
 
